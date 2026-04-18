@@ -12,10 +12,10 @@ Angular 19 SPA consuming the Product Reviews API.
 
 ```bash
 # From workspace root, start the backend first
-cd ../cloudtalk_homework_be && pnpm run dev
+cd ../galaxia_homework_be && pnpm run dev
 
 # In a new terminal
-cd cloudtalk_homework_fe
+cd galaxia_homework_fe
 cp .env.example .env
 pnpm install
 pnpm run codegen     # generate typed GQL services from schema
@@ -78,16 +78,16 @@ src/app/
 
 ### GraphQL codegen
 
-The codegen pipeline reads `../cloudtalk_homework_be/schema.graphql` (relative path from workspace root) and `src/**/*.queries.ts` query documents, and generates typed services into `src/generated/graphql.ts`.
+The codegen pipeline reads `../galaxia_homework_be/schema.graphql` (relative path from workspace root) and `src/**/*.queries.ts` query documents, and generates typed services into `src/generated/graphql.ts`.
 
 Run after any backend schema change:
 
 ```bash
 # Export updated schema from backend first
-cd ../cloudtalk_homework_be && pnpm run schema:export
+cd ../galaxia_homework_be && pnpm run schema:export
 
 # Then regenerate frontend types
-cd ../cloudtalk_homework_fe && pnpm run codegen
+cd ../galaxia_homework_fe && pnpm run codegen
 ```
 
 ## Implementation Phases

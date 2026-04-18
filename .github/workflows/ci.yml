@@ -29,14 +29,14 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       # Recreate the workspace sibling structure that codegen.ts expects:
-      #   ../cloudtalk_homework_be/schema.graphql
+      #   ../galaxia_homework_be/schema.graphql
       # BE is the source of truth (ADR 011). Shallow clone — sparse-checkout on a single
       # file fails in cone mode ("not a directory"); full --depth=1 clone is small enough.
       - name: Fetch BE repo for schema.graphql
         env:
-          BE_REPO: ${{ github.server_url }}/${{ github.repository_owner }}/cloudtalk_homework_be.git
+          BE_REPO: ${{ github.server_url }}/${{ github.repository_owner }}/galaxia_homework_be.git
         run: |
-          SIBLING_DIR="$(dirname "$GITHUB_WORKSPACE")/cloudtalk_homework_be"
+          SIBLING_DIR="$(dirname "$GITHUB_WORKSPACE")/galaxia_homework_be"
           git clone --depth=1 "$BE_REPO" "$SIBLING_DIR"
 
       # Generate src/generated/graphql.ts from BE's schema.graphql.
@@ -85,9 +85,9 @@ jobs:
 
       - name: Fetch BE repo for schema.graphql
         env:
-          BE_REPO: ${{ github.server_url }}/${{ github.repository_owner }}/cloudtalk_homework_be.git
+          BE_REPO: ${{ github.server_url }}/${{ github.repository_owner }}/galaxia_homework_be.git
         run: |
-          SIBLING_DIR="$(dirname "$GITHUB_WORKSPACE")/cloudtalk_homework_be"
+          SIBLING_DIR="$(dirname "$GITHUB_WORKSPACE")/galaxia_homework_be"
           git clone --depth=1 "$BE_REPO" "$SIBLING_DIR"
 
       - name: Generate GraphQL types

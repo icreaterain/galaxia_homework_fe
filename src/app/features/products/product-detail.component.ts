@@ -24,6 +24,16 @@ import { ReviewListComponent } from '../reviews/review-list.component';
 
 type ProductDetail = NonNullable<ProductDetailQuery['product']>;
 
+const THERAGUN_LEGACY_HERO_PATH = '/assets/products/theragun-prime-v2.webp';
+
+export function resolveProductHeroImage(name: string, imageUrl: string | null | undefined) {
+  if (name === 'Theragun Prime Massage Gun') {
+    return THERAGUN_LEGACY_HERO_PATH;
+  }
+
+  return imageUrl ?? null;
+}
+
 @Component({
   selector: 'app-product-detail',
   standalone: true,
@@ -87,7 +97,11 @@ type ProductDetail = NonNullable<ProductDetailQuery['product']>;
           <!-- Product image -->
           <div class="aspect-square bg-gray-100 rounded-xl overflow-hidden">
             @if (p.imageUrl) {
-              <img [src]="p.imageUrl" [alt]="p.name" class="h-full w-full object-cover" />
+              <img
+                [src]="resolveProductHeroImage(p.name, p.imageUrl)"
+                [alt]="p.name"
+                class="product-hero h-full w-full object-cover"
+              />
             } @else {
               <div class="h-full w-full flex items-center justify-center">
                 <svg
@@ -217,6 +231,10 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
   onReviewsChanged(): void {
     // Refetch product detail to pick up updated avgRating and reviewCount
     void this.queryRef.refetch({ id: this.id });
+  }
+
+  resolveProductHeroImage(name: string, imageUrl: string | null | undefined) {
+    return resolveProductHeroImage(name, imageUrl);
   }
 
   formatPrice(price: number): string {

@@ -34,9 +34,9 @@ jobs:
       # Codegen requires BE schema — same shallow-clone pattern as ci.yml
       - name: Fetch BE schema.graphql
         env:
-          BE_REPO: ${{ github.server_url }}/${{ github.repository_owner }}/cloudtalk_homework_be.git
+          BE_REPO: ${{ github.server_url }}/${{ github.repository_owner }}/galaxia_homework_be.git
         run: |
-          SIBLING_DIR="$(dirname "$GITHUB_WORKSPACE")/cloudtalk_homework_be"
+          SIBLING_DIR="$(dirname "$GITHUB_WORKSPACE")/galaxia_homework_be"
           git clone --depth=1 "$BE_REPO" "$SIBLING_DIR"
 
       - name: Generate GraphQL types
@@ -46,8 +46,8 @@ jobs:
       # Override with repo variables API_URL / GRAPHQL_URL if needed (e.g. direct Cloud Run URL).
       - name: Write production env.js
         env:
-          PROD_API_URL: ${{ vars.API_URL || 'https://cloudtalk-homework.web.app/api' }}
-          PROD_GRAPHQL_URL: ${{ vars.GRAPHQL_URL || 'https://cloudtalk-homework.web.app/graphql' }}
+          PROD_API_URL: ${{ vars.API_URL || 'https://galaxia-homework.web.app/api' }}
+          PROD_GRAPHQL_URL: ${{ vars.GRAPHQL_URL || 'https://galaxia-homework.web.app/graphql' }}
         run: |
           cat > public/env.js <<EOF
           (function (window) {
@@ -58,7 +58,7 @@ jobs:
           })(window);
           EOF
 
-      # Production build — output goes to dist/cloudtalk_homework_fe/browser
+      # Production build — output goes to dist/galaxia_homework_fe/browser
       - name: Build
         run: pnpm run build
         env:

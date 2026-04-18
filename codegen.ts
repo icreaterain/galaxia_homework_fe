@@ -1,7 +1,7 @@
 import type { CodegenConfig } from '@graphql-codegen/cli';
 
 const config: CodegenConfig = {
-  schema: '../cloudtalk_homework_be/schema.graphql',
+  schema: '../galaxia_homework_be/schema.graphql',
   documents: 'src/**/*.queries.ts',
   generates: {
     'src/generated/graphql.ts': {

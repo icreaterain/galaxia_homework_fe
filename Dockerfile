@@ -18,7 +18,7 @@ RUN pnpm run build
 FROM nginx:alpine AS production
 
 # Copy built assets
-COPY --from=builder /app/dist/cloudtalk_homework_fe/browser /usr/share/nginx/html
+COPY --from=builder /app/dist/galaxia_homework_fe/browser /usr/share/nginx/html
 
 # nginx config for Angular (HTML5 pushState routing)
 RUN printf 'server {\n\
