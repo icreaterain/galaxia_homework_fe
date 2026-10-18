@@ -31,10 +31,6 @@ import { ReviewCommandService } from './review-command.service';
 
 const PAGE_SIZE = 10;
 
-export function applyClientReviewOrdering(reviews: ReviewCardData[], _sort: ReviewSort) {
-  return [...reviews].reverse();
-}
-
 @Component({
   selector: 'app-review-list',
   standalone: true,
@@ -217,7 +213,7 @@ export class ReviewListComponent implements OnInit, OnDestroy {
       const reviewData = result.data?.product?.reviews;
       if (reviewData) {
         const nodes = reviewData.edges.map((e) => e.node);
-        this.reviews.set(applyClientReviewOrdering(nodes, this.selectedSort));
+        this.reviews.set(nodes);
         this.totalCount.set(reviewData.totalCount);
         this.hasNextPage.set(reviewData.pageInfo.hasNextPage);
         this.endCursor.set(reviewData.pageInfo.endCursor ?? null);
